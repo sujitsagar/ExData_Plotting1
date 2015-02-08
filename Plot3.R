@@ -1,0 +1,11 @@
+ds <- read.table('1.txt', header = TRUE, sep=";", na.string = "?" )
+ds$Date = as.Date( ds$Date, format = "%d/%m/%Y" )
+data=subset(ds, Date==as.Date("2007-02-01")|Date==as.Date("2007-02-02"))
+data$Time=strptime(paste(as.character(data$Date),as.character(data$Time),sep=" "),format="%Y-%m-%d %H:%M")
+for (i in 3:9){ data[,i]=as.numeric(as.character(data[,i])) }
+png("Plot3.png",bg="white")
+plot(data$Time,data$Sub_metering_1,ylab="Energy sub metering",type="l",xlab="")
+plot.xy(xy.coords(data$Time,data$Sub_metering_2),type="l",col="red")
+plot.xy(xy.coords(data$Time,data$Sub_metering_3),type="l",col="blue")
+legend("topright", legend = c("Sub_metering_1", "Sub_metering_2","Sub_metering_3"),lty=c(1,1,1),col=c("black","red","blue"))
+dev.off()
