@@ -1,4 +1,4 @@
-ds <- read.table('1.txt', header = TRUE, sep=";", na.string = "?" )
+ds <- read.table('household_power_consumption.txt', header = TRUE, sep=";", na.string = "?" )
 ds$Date = as.Date( ds$Date, format = "%d/%m/%Y" )
 data=subset(ds, Date==as.Date("2007-02-01")|Date==as.Date("2007-02-02"))
 
